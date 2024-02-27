@@ -123,12 +123,6 @@ const makeHeaders = async (token) => {
 };
 
 const makeRequest = async (request, path, headers) => {
-  let isStream;
-  try {
-    isStream = (await request.clone().json()).stream;
-  } catch(e) {
-    console.error(e);
-  }
   if (path.startsWith("/v1/")) {
     path = path.substring(3);
   }
@@ -141,7 +135,7 @@ const makeRequest = async (request, path, headers) => {
   headers.set("Access-Control-Allow-Origin", "*");
   let body;
   if (response.ok && path === "/chat/completions" && request.method === "POST") {
-    if (isStream) {
+    if (headers.get("Transfer-Encoding") === "chunked") { // is stream
       body = response.body
         .pipeThrough(new TextDecoderStream())
         .pipeThrough(new TransformStream({ transform: cleanStream, buffer: "" }))
