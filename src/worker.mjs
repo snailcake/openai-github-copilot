@@ -1,5 +1,5 @@
 export default {
-  async fetch (request) {
+  async fetch (request, env) {
     if (request.method === "OPTIONS") {
       return handleOPTIONS(request);
     }
@@ -14,8 +14,26 @@ export default {
         status: 401
       });
     }
-    const { token, errResponse } = await getToken(authKey);
-    if (errResponse) { return errResponse; }
+    const tokenCache = env.KV;
+    let token;
+    try {
+      token = await tokenCache.get(authKey);
+    } catch (e) {
+      console.error(e);
+    }
+    if (!token) {
+      let errResponse;
+      ({ token, errResponse } = await getToken(authKey));
+      if (errResponse) { return errResponse; }
+      const expiration = token.match(/;exp=(\d+);/)?.[1];
+      if (expiration) {
+        try {
+          await tokenCache.put(authKey, token, { expiration });
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
     return makeRequest(request, url.pathname, await makeHeaders(token));
   }
 };
