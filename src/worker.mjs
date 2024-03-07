@@ -1,3 +1,5 @@
+import token_html from "./get_copilot_token.html";
+
 export default {
   async fetch (request, env) {
     if (request.method === "OPTIONS") {
@@ -6,6 +8,17 @@ export default {
     const url = new URL(request.url);
     if (url.pathname === "/v1/models") {
       return handleModels(request);
+    }
+    if (url.pathname === "/token") {
+      return new Response(token_html, {
+        headers: { "Content-Type": "text/html" }
+      });
+    }
+    if (url.pathname === "/corsproxy" && url.search.startsWith("?https://")) {
+      let resp = await fetch(url.search.substring(1), request);
+      resp = new Response(resp.body, resp);
+      resp.headers.set("Access-Control-Allow-Origin", "*");
+      return resp;
     }
     const auth = request.headers.get("Authorization");
     let authKey = auth && auth.split(" ")[1];
