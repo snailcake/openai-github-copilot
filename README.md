@@ -58,6 +58,9 @@ into https://workers.cloudflare.com/playground (see there `Deploy` button).
 
 ### Advanced instructions
 
+<details>
+<summary>Button-deploy and CI are only supported on Github</summary>
+
 > [!TIP]
 > If your account is new and you haven't created any workers yet, some of the links mentioned below
 > might be inaccessible. Therefore, it's recommended to create at least a "Hello World" Worker:
@@ -80,7 +83,7 @@ replacing the existing `id` with your copied value.
 
 Once you push these changes, the CI will automatically deploy the repo to Cloudflare Workers,
 this time without any issues.
-
+</details>
 
 ### Manual deployment
 
