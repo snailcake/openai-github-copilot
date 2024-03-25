@@ -1,5 +1,6 @@
 ## Why
 
+> [!TIP]
 > [GitHub Copilot](https://docs.github.com/en/copilot/quickstart) is free to use for
 > <strong>verified</strong> [students], [teachers], and [maintainers] of <strong>popular</strong> open source projects.
 <details>
