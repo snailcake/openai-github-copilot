@@ -145,6 +145,13 @@ For some command-line tools, you may need to set an environment variable, _e.g._
 set OPENAI_API_KEY=ghu_...
 ```
 
+### Models
+
+The list of available models can be accessed through the standard `/v1/models` endpoint
+and may vary depending on the provided API key.
+
+Examples: `gpt-3.5-turbo`, `gpt-4`, `gpt-4-0125-preview`, `gpt-4-o-preview`.
+
 
 ## Tech notes
 
@@ -159,6 +166,4 @@ Copilot provides following endpoints:
   - Output is not altered in any way, and has some minor differences from OpenAI's:
     - no `object` property (`"object": "embedding"`)
     - no `model` property (`"model": "text-embedding-3-small"`)
-- `/v1/models`: Copilot does not provide models list, so it was determined empirically,
-  and this API endpoint is served with `openai-github-copilot` itself.
 - `/token`: serves a Web page that allows you to obtain a Github Copilot access token.

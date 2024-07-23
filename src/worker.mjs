@@ -6,9 +6,6 @@ export default {
       return handleOPTIONS(request);
     }
     const url = new URL(request.url);
-    if (url.pathname === "/v1/models") {
-      return handleModels(request);
-    }
     if (url.pathname === "/token") {
       return new Response(token_html, {
         headers: { "Content-Type": "text/html" }
@@ -49,27 +46,6 @@ export default {
     }
     return makeRequest(request, url.pathname, await makeHeaders(token));
   }
-};
-
-const handleModels = async () => {
-  const data = {
-    "object": "list",
-    "data": [
-      //{"id": "text-embedding-3-large", "object": "model", "created": 1705953180, "owned_by": "system"},
-      {"id": "text-embedding-3-small", "object": "model", "created": 1705948997, "owned_by": "system"},
-      {"id": "text-embedding-ada-002", "object": "model", "created": 1671217299, "owned_by": "openai-internal"},
-      {"id": "gpt-3.5-turbo", "object": "model", "created": 1677610602, "owned_by": "openai"},
-      {"id": "gpt-4", "object": "model", "created": 1687882411, "owned_by": "openai"},
-    ]
-  };
-  const json = JSON.stringify(data, null, 2);
-  return new Response(json, {
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-      "X-Robots-Tag": "noindex",
-    },
-  });
 };
 
 const handleOPTIONS = async () => {
