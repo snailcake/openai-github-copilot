@@ -189,8 +189,7 @@ const clean = (str) => {
     console.error(e);
     return str;
   }
-  json.model = "gpt-4"; // stub
-  //json.system_fingerprint = null;
+  //json.model = "gpt-4"; // stub
   json.object = "chat.completion";
   delete json.prompt_filter_results;
   for (const item of json.choices) {
@@ -212,8 +211,7 @@ const cleanLine = (str) => {
       return str;
     }
     if (json.choices.length === 0) { return; } // json.prompt_filter_results
-    json.model = "gpt-4"; // stub
-    //json.system_fingerprint = null;
+    //json.model = "gpt-4"; // stub
     json.object = "chat.completion.chunk";
     for (const item of json.choices) {
       delete item.content_filter_offsets;

@@ -152,7 +152,6 @@ Copilot provides following endpoints:
 - `/v1/chat/completions`
   - `tools` and other related properties are ignored.
   - Output is post-processed in order to remove differences from OpenAI's.
-    The `model` property always appears as "gpt-4".
 - `/v1/embeddings`
   - [`input`](https://platform.openai.com/docs/api-reference/embeddings/create#embeddings-create-input):
     supports array of strings only
