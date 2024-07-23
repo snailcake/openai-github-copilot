@@ -82,8 +82,8 @@ const handleOPTIONS = async () => {
   });
 };
 
-const chatVersion = "0.13.0";
-const vscodeVersion = "1.87.0";
+const chatVersion = "0.17.1";
+const vscodeVersion = "1.91.1";
 const apiVersion = "2023-07-07";
 const getToken = async (authKey) => {
   if (authKey.startsWith("sk-")) { // dumb attempt to hide real auth key from malicious web services
